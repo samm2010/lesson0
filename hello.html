@@ -1,11 +1,300 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Webpage</title>
+  <h1>Assignment 1 - Data Visualization </h1>
+  <h2>Submitted By : M.Osama Moazzam </h2>
 </head>
+
 <body>
-    hello! world 
+  <form class="Assignment">
+    Write a javascript program that lets a user enter data on a webpage and calculate the following
+    fuctions.<br>
+    <select autofocus id="ql" onchange="questions()">
+      <option></option>
+      <option>1-Arithmetic Mean</option>
+      <option>2-Geometric Mean</option>
+      <option>3-Range</option>
+      <option>4-Standard Deviation</option>
+      <option>5-Sample Standard Deviation</option>
+      <option>6-nth Root</option>
+    </select>
+  </form>
+  <div name="elementsDiv">
+    <p name="block" id="qd"></p>
+    <p name="block" id="inputDiv"></p>
+    <p name="block" id="solution" style="width: fit-content;"></p>
+  </div>
+  <script>
+    /////////////
+    function generalForm() {
+      var x = document.createElement("FORM");
+      x.setAttribute("id", "genForm");
+      x.setAttribute("onchange", "solution()");;
+      document.getElementById("inputDiv").appendChild(x);
+      let id = 0;
+      for (let i = 0; i < 15; i++) {
+        id++;
+        var inputs = document.createElement("INPUT");
+        inputs.type = "number";
+        inputs.name = "inputText";
+        inputs.id = id;
+        inputs.autocomplete = "off";
+        inputs.placeholder = id + "#";
+        document.getElementById("genForm").appendChild(inputs);
+      }
+    }
+    ///////////////////
+    function rangeForm() {
+      var x = document.createElement("FORM");
+      x.setAttribute("id", "rangeForm");
+      x.setAttribute("onchange", "solution()");
+      document.getElementById("inputDiv").appendChild(x);
+      let id = ["minim", "maxim", "range"];
+      for (let i = 0; i < 3; i++) {
+        var inputs = document.createElement("INPUT");
+        inputs.type = "number";
+        inputs.id = id[i];
+        inputs.autocomplete = "off";
+        inputs.placeholder = id[i];
+        document.getElementById("rangeForm").appendChild(inputs);
+      }
+    }
+    //////////////////
+    function nthForm() {
+      var x = document.createElement("FORM");
+      x.setAttribute("id", "nthForm");
+      x.setAttribute("onchange", "solution()");
+      document.getElementById("inputDiv").appendChild(x);
+      let id = ["A", "n"];
+      for (let i = 0; i < 2; i++) {
+        var inputs = document.createElement("INPUT");
+        inputs.type = "number";
+        inputs.id = id[i];
+        inputs.autocomplete = "off";
+        inputs.placeholder = id[i];
+        document.getElementById("nthForm").appendChild(inputs);
+      }
+    }
+
+    function solution() {
+
+      if (ql.options[ql.selectedIndex].text == "1-Arithmetic Mean") {
+        arithmeticMean();
+      }
+
+      if (ql.options[ql.selectedIndex].text == "2-Geometric Mean") {
+        geometricMean();
+      }
+      ////////////////////
+      if (ql.options[ql.selectedIndex].text == "3-Range") {
+        range();
+      }
+      ////////////////////////
+      if (ql.options[ql.selectedIndex].text == "4-Standard Deviation") {
+        standardDeviation();
+      }
+      //////////////
+
+      if (ql.options[ql.selectedIndex].text == "5-Sample Standard Deviation") {
+        sampleStandardDeviation();
+      }
+      ///////////////////
+
+      if (ql.options[ql.selectedIndex].text == "6-nth Root") {
+        nthRoot();
+      }
+    }
+    ////////////////////////
+    function questions() {
+      if (ql.options[ql.selectedIndex].text == "") {
+        nulls();
+      }
+      ///////////////
+
+      if (ql.options[ql.selectedIndex].text == "1-Arithmetic Mean") {
+        nulls();
+        document.getElementById("qd").innerHTML = "1. The arithmetic mean of a set of numbers x1,x2,x3,...,xn. ";
+        generalForm();
+      }
+      //////////////
+
+      if (ql.options[ql.selectedIndex].text == "2-Geometric Mean") {
+        nulls();
+        document.getElementById("qd").innerHTML = "2. The geometric mean of a set of numbers x1,x2,x3,...,xn. ";
+        generalForm();
+      }
+      ////////////////////
+
+      if (ql.options[ql.selectedIndex].text == "3-Range") {
+        nulls();
+        document.getElementById("qd").innerHTML = "3. Generating a set of random values. The input should be the range (lower and upper limit) in which the number should be generated and a number n that indicates thenumber of random numbers to be generated.";
+        rangeForm();
+      }
+      ////////////
+
+      if (ql.options[ql.selectedIndex].text == "4-Standard Deviation") {
+        nulls();
+        document.getElementById("qd").innerHTML = "4. The population standard deviation, the standard definition of σ, is used when an entire population can be measured, and is the square root of the variance of a given data set. In cases where every member of a population can be sampled";
+        generalForm();
+      }
+      //////////////
+
+      if (ql.options[ql.selectedIndex].text == "5-Sample Standard Deviation") {
+        nulls();
+        document.getElementById("qd").innerHTML = "5.In many cases, it is not possible to sample every member within a population, requiring that the above equation be modified so that the standard deviation can be measured through a random sample of the population being studied. A common estimator for σ is the sample standard deviation, typically denoted by s. It is worth noting that there exist many different equations for calculating sample standard deviation since unlike sample mean, sample standard deviation does not have any single estimator that is unbiased, efficient, and has a maximum likelihood. The equation provided below is the corrected sample standard deviation. It is a corrected version of the equation obtained from modifying the population standard deviation equation by using the sample size as the size of the population, which removes some of the bias in the equation. Unbiased estimation of standard deviation however, is highly involved and varies depending on distribution. As such, the corrected sample standard deviation is the most commonly used estimator for population standard deviation, and is generally referred to as simply the sample standard deviation. It is a much better estimate than its uncorrected version, but still has significant bias for small sample sizes (N < 10). ";
+        generalForm();
+      }
+      ///////////////////
+
+      if (ql.options[ql.selectedIndex].text == "6-nth Root") {
+        nulls();
+        document.getElementById("qd").innerHTML = "6. The principal nth root pn A of a positive real number A. See https://en.wikipedia.org/wiki/Nth_root_algorithm for an algorithm.";
+        nthForm();
+      }
+    }
+    //////////////////////////////////////////////
+    function nulls() {
+      document.getElementById("qd").innerHTML = '';
+      document.getElementById('inputDiv').innerHTML = "";
+      document.getElementById("solution").innerHTML = "";
+    }
+    //////////
+
+   //random arrayfunction
+    function randomPopulation(a) {
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+    /////////////////
+    function arithmeticMean() {
+      var inputVals = document.getElementsByName("inputText");
+      var sum = 0;
+      var countFilledInputs = 0;
+      for (var i = 0; i < inputVals.length; i++) {
+        var validInputVals = inputVals[i].value || 0;
+        sum = parseFloat(sum) + parseFloat(validInputVals);
+        if (inputVals[i].value !== "") {
+          countFilledInputs++;
+        }
+      }
+      let mean = parseFloat(sum) / parseFloat(countFilledInputs);
+      document.getElementById("solution").innerHTML = "No. of Data Entries="
+        + countFilledInputs + " Sum= " + sum + " Arithmetic Mean:" + mean;
+    }
+    //////////////////////
+    function geometricMean() {
+      var inputVals = document.getElementsByName("inputText");
+      var mul = 1;
+      var countFilledInputs = 0;
+      for (var i = 0; i < inputVals.length; i++) {
+        var validInputVals = inputVals[i].value || 1;
+        mul = parseFloat(mul) * parseFloat(validInputVals);
+        if (inputVals[i].value !== "") {
+          countFilledInputs++;
+        }
+      }
+      let gm = Math.pow(mul, (1 / countFilledInputs));
+      document.getElementById("solution").innerHTML = "No. of Data Entries= "
+        + countFilledInputs + " Geometric Mean= " + gm;
+    }
+    //////////////////////////////////////////
+    function range() {
+      var arr = [];
+      var max = document.getElementById("maxim").value;
+      var min = document.getElementById("minim").value;
+      var n = document.getElementById("range").value;
+      for (let m = 0; m < n; m++) {
+        let x = Math.floor((Math.random() * (max - min + 1)) + min);
+        arr.push(x);
+        document.getElementById("solution").innerHTML = "Range = {" + arr + "}";
+      }
+    }
+    ///////////////////////
+    function standardDeviation() {
+      //mean
+      var inputVals = document.getElementsByName("inputText");
+      var sum = 0;
+      var countFilledInputs = 0;
+      for (var i = 0; i < inputVals.length; i++) {
+        var populationInputVals = inputVals[i].value || 0;
+        sum = parseFloat(sum) + parseFloat(populationInputVals);
+        if (inputVals[i].value !== "") {
+          countFilledInputs++;
+        }
+      }
+      let mean = parseFloat(sum) / parseFloat(countFilledInputs);
+      //Standard Deviation
+      var SDprep = 0;
+      for (var k = 0; k < countFilledInputs; k++) {
+        var diff = parseFloat(populationInputVals) - mean;
+        SDprep += Math.pow(diff, 2);
+        var SD = Math.sqrt(SDprep / countFilledInputs);
+      }
+      document.getElementById("solution").innerHTML = "No. of Data Entries= "
+        + countFilledInputs + " Standard Deviation= " + SD;
+    }
+    ////////////////////////
+    function sampleStandardDeviation() {
+      var arr = [];
+      var inputs = document.getElementsByName("inputText");
+      var countFilledInputs = 0;
+      for (let k = 0; k < inputs.length; k++) {
+        var inputVals = inputs[k].value;
+        if (inputs[k].value !== "") {
+          arr.push(inputVals || 0);
+          countFilledInputs++;
+        }
+      }
+      randomPopulation(arr);
+      samplePopulation = arr.slice(0, 10);
+      var sum = samplePopulation.reduce(function (a, b) { return parseFloat(a) + parseFloat(b); }, 0);
+      var sampleMean = parseFloat(sum) / parseFloat(10);
+      var sampleSize = samplePopulation.length;
+      if (countFilledInputs > 9) {
+        var sampleMean = parseFloat(sum) / 10;
+        //Sample Standard Deviation
+        var SSDprep = 0;
+        for (var l = 0; l < countFilledInputs; l++) {
+          var diff = parseFloat(inputs[l].value) - parseFloat(sampleMean);
+          SSDprep += Math.pow(diff, 2);
+        }
+        console.log(diff);
+        console.log(SSDprep);
+        var SSD = Math.sqrt(SSDprep / (countFilledInputs - 1));
+        document.getElementById("solution").innerHTML = "No. of Data Entries=" + countFilledInputs +
+          " <br>SampleMean= " + sampleMean + "<br>Sample Size= " + sampleSize + "<br>Sample Standard Deviation:" + SSD;
+      }
+      else {
+        document.getElementById("solution").innerHTML = "No. of Data Entries=" + countFilledInputs + "<br>Population Sample size is less than 10."
+      }
+    }
+    ///////////////////////
+    function nthRoot() {
+      var A = document.getElementById("A").value;
+      var N = document.getElementById("n").value;
+      //initial guess
+      let min = 0;
+      let max = 9;
+      let xPre = Math.floor((Math.random() * (max - min + 1)) + min);
+      var eps = 1e-3;
+      var delX = 2147483647;
+      var xK = 0.0;
+
+      while (delX > eps) {
+        //newton's method
+        xK = ((N - 1) * xPre + A / Math.pow(xPre, N - 1)) / N;
+        delX = Math.abs(xK - xPre);
+        xPre = xK;
+      }
+      document.getElementById("solution").innerHTML = "nthRoot= " + xK.toFixed(2);
+    }
+    /////////////////////////
+  </script>
+
 </body>
+
 </html>
